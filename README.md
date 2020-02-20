@@ -20,7 +20,7 @@ Steps:
 1. Creat two roles.. one `tomcat` & other `mysql` using `ansible-galaxy`
 ```
 ansible-galaxy init tomcat
-ansible-galay init mysql
+ansible-galaxy init mysql
 ```
 
 It will create all defult folder structure.. keep the folders which you require and remove the rest for better visibility and understanding.
@@ -56,7 +56,7 @@ ansible-playbook roles/site.yml
 
 After the successfull execution of the playbook, you can view the application by logging into it.
 e.i.
-
+![alt text](https://github.com/ranjit4github/Ansible_Demo_Project/blob/master/Screenshot%202020-02-20%20at%2010.43.36%20PM.png)
 
 And check the Databae:
 
