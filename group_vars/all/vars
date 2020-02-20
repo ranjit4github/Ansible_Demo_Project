@@ -1,0 +1,5 @@
+---
+# vars file for mysql
+db_name: devopsclass
+db_user: ranjit
+db_password: "{{ vault_db_pass }}" 

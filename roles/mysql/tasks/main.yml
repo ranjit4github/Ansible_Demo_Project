@@ -1,0 +1,43 @@
+---
+# tasks file for mysql
+   - name: Download MySQL Community Repo
+     get_url:
+       url: http://repo.mysql.com/mysql-community-release-el7-7.noarch.rpm
+       dest: /opt
+
+#   - name: Install MySQL Community Repo
+#     command: /usr/bin/rpm -ivh /opt/mysql-community-release-el7-7.noarch.rpm
+
+   - name: Install MySQL Server
+     yum: name=mysql-server state=present
+
+   - name: Install MySQL-python, this is required for the task remove anonymous user
+     yum: name=MySQL-python state=present
+
+   - name: Start MySQL Server and enable it
+     service: name=mysqld state=started enabled=yes
+
+   - name: Remove Test database if it exist.
+     mysql_db: name=test state=absent
+
+   - name: Change root password
+     mysql_user:
+       name: "{{ db_user }}"
+       password: "{{ db_password }}"
+       priv: '*.*:ALL'
+       state: present
+   - name: Create database
+     mysql_db:
+       login_user: "{{ db_user }}"
+       login_password: "{{ db_password }}"
+       name: "{{ db_name }}"
+       state: present
+   - name: Copy database dump file
+     copy:
+       src: /etc/ansible/db/devopsclass.sql
+       dest: /tmp
+   - name: Restore database
+     mysql_db:
+       name: devopsclass
+       state: import
+       target: /tmp/devopsclass.sql
