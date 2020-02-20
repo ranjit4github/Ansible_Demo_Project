@@ -55,7 +55,9 @@ ansible-playbook roles/site.yml
 **Note**: Here we have used onle one server to install both webserver and database. I will update this further and add the DB part into a different database server.
 
 After the successfull execution of the playbook, you can view the application by logging into it.
+
 e.i.
+
 ![alt text](https://github.com/ranjit4github/Ansible_Demo_Project/blob/master/Screenshot%202020-02-20%20at%2010.43.36%20PM.png)
 
 And check the Databae:
