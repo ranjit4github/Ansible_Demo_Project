@@ -2,4 +2,7 @@
  - hosts: webservers
    roles:
      - tomcat
+
+ - hosts: dbserver
+   roles:
      - mysql
