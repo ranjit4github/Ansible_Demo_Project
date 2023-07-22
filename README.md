@@ -90,3 +90,21 @@ mysql> show databases;
 
 mysql>
 ```
+Troubleshoot:
+------------
+**Error 1**:
+TASK [tomcat : Install Java] ***************************************************************************************************
+fatal: [finserv]: FAILED! => {"changed": false, "msg": "Unsupported parameters for (ansible.legacy.yum) module: become, become_user. Supported parameters include: bugfix, enable_plugin, state, cacheonly, use_backend, releasever, disable_plugin, enablerepo, installroot, update_cache (expire-cache), disable_excludes, security, autoremove, download_dir, disablerepo, lock_timeout, install_weak_deps, conf_file, disable_gpg_check, skip_broken, update_only, exclude, install_repoquery, allow_downgrade, download_only, list, name (pkg), validate_certs."}
+
+Resolution:
+In ansible.cfg file make the below changes
+become=True
+become_user=root
+
+**Error 2**:
+TASK [mysql : Remove Test database if it exist.] *******************************************************************************
+fatal: [finserv]: FAILED! => {"changed": false, "msg": "A MySQL module is required: for Python 2.7 either PyMySQL, or MySQL-python, or for Python 3.X mysqlclient or PyMySQL. Consider setting ansible_python_interpreter to use the intended Python version."}
+
+Resolution:
+Set the interpreter line in ansible.cfg
+interpreter_python=/usr/bin/python2
