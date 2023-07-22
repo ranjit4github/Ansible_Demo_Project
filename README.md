@@ -98,7 +98,9 @@ fatal: [finserv]: FAILED! => {"changed": false, "msg": "Unsupported parameters f
 
 Resolution:
 In ansible.cfg file make the below changes
+
 become=True
+
 become_user=root
 
 **Error 2**:
@@ -107,4 +109,5 @@ fatal: [finserv]: FAILED! => {"changed": false, "msg": "A MySQL module is requir
 
 Resolution:
 Set the interpreter line in ansible.cfg
+
 interpreter_python=/usr/bin/python2
