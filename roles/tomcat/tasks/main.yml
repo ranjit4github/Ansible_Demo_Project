@@ -26,7 +26,9 @@
        file: path=/usr/share/tomcat/ owner=tomcat group=tomcat state=directory recurse=yes
 
      - name: Copy file
-       copy: src=../../../App/LoginWebApp.war dest=/usr/share/tomcat/webapps/LoginWebApp.war
+       copy: src=../../App/LoginWebApp.war dest=/usr/share/tomcat/webapps/LoginWebApp.war
 
      - name: Start tomcat
-       shell: /usr/share/tomcat/bin/startup.sh
+       shell: /usr/share/tomcat/bin/catalina.sh start
+       become: True
+       become_user: root
