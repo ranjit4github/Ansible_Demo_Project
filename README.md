@@ -48,9 +48,9 @@ total 4
 total 4
 -rw-r--r--. 1 root root 1245 Feb 19 18:02 main.yml
 ```
-5. Once you setup the project run the play book (site.yml) - site.yml contains the roles which need to be executed.
+5. Once you setup the project run the play book (site.yml) - site.yml contains the roles which need to be executed with extra variable 'vers' which is the application version and you need to change it as per your version requirement.
 ```
-ansible-playbook roles/site.yml
+ansible-playbook -e vers=6 roles/site.yml
 ```
 **Note**: Here we have used onle one server to install both webserver and database. I will update this further and add the DB part into a different database server.
 
