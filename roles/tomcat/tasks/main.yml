@@ -1,7 +1,7 @@
 ---
 # tasks file for tomcat
      - name: Install Java
-       yum:
+       ansible.builtin.yum:
          name: java-1.8.0-openjdk
          state: present
 
@@ -9,29 +9,35 @@
        group: name=tomcat
 
      - name: add user "tomcat"
-       user: name=tomcat group=tomcat home=/usr/share/tomcat createhome=no
+       ansible.builtin.user: name=tomcat group=tomcat home=/usr/share/tomcat createhome=no
        become: True
        become_method: sudo
 
      - name: Download Tomcat
-       get_url: url=http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.61/bin/apache-tomcat-7.0.61.tar.gz dest=/opt/apache-tomcat-7.0.61.tar.gz
+       ansible.builtin.get_url: url=http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.61/bin/apache-tomcat-7.0.61.tar.gz dest=/opt/apache-tomcat-7.0.61.tar.gz
 
      - name: Extract archive
-       command: chdir=/usr/share /bin/tar xvf /opt/apache-tomcat-7.0.61.tar.gz -C /opt/ creates=/opt/apache-tomcat-7.0.61
+       ansible.builtin.command: chdir=/usr/share /bin/tar xvf /opt/apache-tomcat-7.0.61.tar.gz -C /opt/ creates=/opt/apache-tomcat-7.0.61
 
      - name: Symlink install directory
-       file: src=/opt/apache-tomcat-7.0.61 path=/usr/share/tomcat state=link
+       ansible.builtin.file: src=/opt/apache-tomcat-7.0.61 path=/usr/share/tomcat state=link
 
      - name: Change ownership of Tomcat installation
-       file: path=/usr/share/tomcat/ owner=tomcat group=tomcat state=directory recurse=yes
+       ansible.builtin.file: path=/usr/share/tomcat/ owner=tomcat group=tomcat state=directory recurse=yes
 
      - name: Download Artifact from Nexus
-       get_url: url=http://65.2.176.229:8081/repository/LoginWebApp/com/ranjitswain/LoginWebApp/5/LoginWebApp-5.war dest=/opt/LoginWebApp-5.war
+       ansible.builtin.get_url: url=http://65.2.176.229:8081/repository/LoginWebApp/com/ranjitswain/LoginWebApp/5/LoginWebApp-5.war dest=/opt/LoginWebApp-5.war
 
      - name: Copy file
-       copy: src=/opt/LoginWebApp-5.war dest=/usr/share/tomcat/webapps/LoginWebApp.war
+       ansible.builtin.copy:
+         src: /opt/LoginWebApp-5.war
+         dest: /usr/share/tomcat/webapps/LoginWebApp.war
+         remote_src: true
+         owner: tomcat
+         group: tomcat
+         mode: '666'
 
      - name: Start tomcat
-       shell: /usr/share/tomcat/bin/catalina.sh start
+       ansible.builtin.shell: /usr/share/tomcat/bin/catalina.sh start
        become: True
        become_user: root
