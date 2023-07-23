@@ -25,8 +25,11 @@
      - name: Change ownership of Tomcat installation
        file: path=/usr/share/tomcat/ owner=tomcat group=tomcat state=directory recurse=yes
 
+     - name: Download Artifact from Nexus
+       get_url: url=http://65.2.176.229:8081/repository/LoginWebApp/com/ranjitswain/LoginWebApp/5/LoginWebApp-5.war dest=/opt/LoginWebApp-5.war
+
      - name: Copy file
-       copy: src=../../App/LoginWebApp.war dest=/usr/share/tomcat/webapps/LoginWebApp.war
+       copy: src=/opt/LoginWebApp-5.war dest=/usr/share/tomcat/webapps/LoginWebApp.war
 
      - name: Start tomcat
        shell: /usr/share/tomcat/bin/catalina.sh start
