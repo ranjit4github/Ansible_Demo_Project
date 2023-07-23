@@ -5,8 +5,9 @@
        url: http://repo.mysql.com/mysql-community-release-el7-7.noarch.rpm
        dest: /opt
 
-#   - name: Install MySQL Community Repo
-#     command: /usr/bin/rpm -ivh /opt/mysql-community-release-el7-7.noarch.rpm
+   - name: Install MySQL Community Repo
+     command: /usr/bin/rpm -ivh /opt/mysql-community-release-el7-7.noarch.rpm
+     ignore_errors: true
 
    - name: Install MySQL Server
      yum: name=mysql-server state=present
@@ -19,6 +20,7 @@
 
    - name: Remove Test database if it exist.
      mysql_db: name=test state=absent
+     ignore_errors: true
 
    - name: Change root password
      mysql_user:
