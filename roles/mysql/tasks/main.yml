@@ -43,3 +43,4 @@
        name: devopsclass
        state: import
        target: /tmp/devopsclass.sql
+       ignore_errors: true
