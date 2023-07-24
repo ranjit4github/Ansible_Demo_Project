@@ -1,5 +1,5 @@
 [lampserver]
-finserv ansible_host=13.233.184.177 ansible_user=ec2-user
+finserv ansible_host=13.235.245.255 ansible_user=ec2-user
 #finserv1 ansible_host=43.205.139.187 ansible_user=ubuntu
 
 [dbserver]
