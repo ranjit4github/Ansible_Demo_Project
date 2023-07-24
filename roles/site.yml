@@ -1,5 +1,5 @@
 ---
- - hosts: webservers
+ - hosts: lampserver
    roles:
      - tomcat
      - mysql
