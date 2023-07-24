@@ -34,7 +34,6 @@
        login_password: "{{ db_password }}"
        name: "{{ db_name }}"
        state: present
-     register: db_created
    - name: Copy database dump file
      copy:
        src: /etc/ansible/db/devopsclass.sql
@@ -44,4 +43,5 @@
        name: devopsclass
        state: import
        target: /tmp/devopsclass.sql
-     when: db_created.changed  
+     register: dbstatus
+     when: dbstatus.rc != 0  
