@@ -26,7 +26,7 @@
        ansible.builtin.file: path=/usr/share/tomcat/ owner=tomcat group=tomcat state=directory recurse=yes
 
      - name: Download Artifact from Nexus
-       ansible.builtin.get_url: url=http://65.2.176.229:8081/repository/LoginWebApp/com/ranjitswain/LoginWebApp/{{vers}}/LoginWebApp-{{vers}}.war dest=/opt/LoginWebApp-{{vers}}.war
+       ansible.builtin.get_url: url=http://65.2.189.169:8081/repository/LoginWebApp/com/ranjitswain/LoginWebApp/{{vers}}/LoginWebApp-{{vers}}.war dest=/opt/LoginWebApp-{{vers}}.war
 
      - name: Copy file
        ansible.builtin.copy:
